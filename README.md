@@ -27,12 +27,6 @@ npm run build
 ```
 
 <p align="center">
-| property | type   | default  | required | purpose                     | format  |
-| -------- | ------ | -------- | -------- | --------------------------- | ------- |
-| autoPlay | number | undefine | no       | time required for animation | seconds |
-</p>
-
-<p align="center"></p>
 <table>
     <thead>
         <tr>
@@ -54,6 +48,5 @@ npm run build
             <td align="left">seconds</td>
         </tr>
     </tbody>
-
 </table>
-<p></p>
+</p>
