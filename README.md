@@ -26,7 +26,6 @@ You will also see any lint errors in the console.
 npm run build
 ```
 
-<Carousel autoPlay={7}>{divWithText}</Carousel>
-| property | type | default | required | purpose |format|
-| ------------- | ------- | ------- | -------- | ------------------------------------ |
-| autoPlay | number | undefine | No | time required for animation |seconds|
+| property | type   | default  | required | purpose                     | format  |
+| -------- | ------ | -------- | -------- | --------------------------- | ------- |
+| autoPlay | number | undefine | No       | time required for animation | seconds |
