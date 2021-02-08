@@ -46,7 +46,9 @@ const Carousel: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const slider = divRef.current;
+
     if (slider === null) return;
+
     const smooth = (e: Event) => {
       // e type may bee wrong
       const element = e.target as HTMLButtonElement;
