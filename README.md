@@ -28,4 +28,4 @@ npm run build
 
 | property | type   | default  | required | purpose                     | format  |
 | -------- | ------ | -------- | -------- | --------------------------- | ------- |
-| autoPlay | number | undefine | No       | time required for animation | seconds |
+| autoPlay | number | undefine | no       | time required for animation | seconds |
