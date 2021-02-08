@@ -30,20 +30,20 @@ npm run build
   <table>
       <thead>
           <tr>
-              <th align="left">property</th>
-              <th align="left">type</th>
-              <th align="left">default</th>
-              <th align="left">required</th>
-              <th align="left">purpose</th>
-              <th align="left">format</th>
+              <th align="left">Property</th>
+              <th align="left">Type</th>
+              <th align="left">Default</th>
+              <th align="left">Required</th>
+              <th align="left">Purpose</th>
+              <th align="left">Format</th>
           </tr>
       </thead>
       <tbody>
           <tr>
               <td align="left">autoPlay</td>
-              <td align="left"">number</td>
+              <td align="left">number</td>
               <td align="left">undefine</td>
-              <td align="left"">no</td>
+              <td align="left">no</td>
               <td align="left">time required for animation</td>
               <td align="left">seconds</td>
           </tr>
