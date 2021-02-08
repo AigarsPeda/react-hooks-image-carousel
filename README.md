@@ -26,6 +26,12 @@ You will also see any lint errors in the console.
 npm run build
 ```
 
+<p align="center">
+| property | type   | default  | required | purpose                     | format  |
+| -------- | ------ | -------- | -------- | --------------------------- | ------- |
+| autoPlay | number | undefine | no       | time required for animation | seconds |
+</p>
+
 <p align="center"></p>
 <table>
     <thead>
@@ -34,7 +40,8 @@ npm run build
             <th align="left">type</th>
             <th align="left">default</th>
             <th align="left">required</th>
-            <th align="left">format </th>
+            <th align="left">purpose</th>
+            <th align="left">format</th>
         </tr>
     </thead>
     <tbody>
