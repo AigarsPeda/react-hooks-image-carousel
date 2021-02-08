@@ -26,6 +26,8 @@ You will also see any lint errors in the console.
 npm run build
 ```
 
+<p align="center">
 | property | type   | default  | required | purpose                     | format  |
 | -------- | ------ | -------- | -------- | --------------------------- | ------- |
 | autoPlay | number | undefine | no       | time required for animation | seconds |
+</p>
