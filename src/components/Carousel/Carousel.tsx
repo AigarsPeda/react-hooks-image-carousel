@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import Dots from "./Dots/Dots";
+import ArrowIconLeft from "./Icons/ArrowIconLeft";
+import ArrowIconRight from "./Icons/ArrowIconRight";
 
 interface Props {
   children: React.ReactElement[];
@@ -64,41 +66,30 @@ const Carousel: React.FC<Props> = (props) => {
   };
 
   return (
-    <div
-      ref={divRef}
-      style={{
-        position: "relative",
-        // height: '100%',
-        // width: '100%',
-        overflow: "hidden"
-      }}
-    >
+    <div ref={divRef} className="carousel-container">
       <div
         style={{
           transform: `translateX(-${translate}px)`,
           transition: `transform ease-out ${transition}s`,
-          height: "100%",
+          // height: "100%",
           width: `${getWidth() * children.length}px`,
           display: "flex"
         }}
       >
         {children.map((slide, index) => (
-          <div
-            key={index}
-            style={{
-              width: "100%",
-              backgroundColor: "blue",
-              overflow: "auto"
-            }}
-          >
+          <div key={index} className="carousel-item">
             {slide}
           </div>
         ))}
       </div>
 
       <Dots activeIndex={activeIndex}>{props.children}</Dots>
-      <button onClick={prevSlide}>Prev</button>
-      <button onClick={nextSlide}>Next</button>
+      <button onClick={prevSlide} className="left">
+        <ArrowIconLeft />
+      </button>
+      <button onClick={nextSlide} className="right">
+        <ArrowIconRight />
+      </button>
     </div>
   );
 };
