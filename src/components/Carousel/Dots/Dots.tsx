@@ -7,7 +7,7 @@ interface DotProps {
 const Dot: React.FC<DotProps> = ({ active }) => (
   <span
     style={{
-      padding: "10px",
+      padding: "5px",
       marginRight: "5px",
       cursor: "pointer",
       borderRadius: "50%",
@@ -25,6 +25,7 @@ interface DotsProps {
 const Dots: React.FC<DotsProps> = ({ children, activeIndex }) => (
   <div
     style={{
+      marginTop: "10px",
       width: "100%",
       display: "flex",
       alignItems: "center",
