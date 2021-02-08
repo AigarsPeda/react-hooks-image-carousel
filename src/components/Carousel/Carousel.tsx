@@ -9,12 +9,13 @@ interface Props {
 }
 
 const Carousel: React.FC<Props> = (props) => {
-  const { autoPlay, children: propsChildren } = props;
-  const children = React.Children.toArray(propsChildren);
+  const { autoPlay, children } = props;
+
+  // const children = React.Children.toArray(propsChildren);
 
   const divRef = useRef<HTMLDivElement>(null);
-  const transitionRef = useRef<() => void>();
-  // const sliderRef = useRef();
+  const transitionRef = useRef<() => void | null>();
+  const resizeRef = useRef<() => void | null>();
 
   // const getWidth = () => window.innerWidth
 
@@ -42,6 +43,8 @@ const Carousel: React.FC<Props> = (props) => {
   useEffect(() => {
     // eslint-disable-next-line functional/immutable-data
     transitionRef.current = smoothTransition;
+    // eslint-disable-next-line functional/immutable-data
+    resizeRef.current = handleResize;
   });
 
   useEffect(() => {
@@ -62,14 +65,27 @@ const Carousel: React.FC<Props> = (props) => {
       }
     };
 
+    const resize = () => {
+      if (resizeRef.current === null || resizeRef.current === undefined) return;
+      resizeRef.current();
+    };
+
     // const transitionEnd = slider.addEventListener("transitionend", smooth);
     slider.addEventListener("transitionend", smooth);
+    // const onResize = window.addEventListener('resize', resize)
+    window.addEventListener("resize", resize);
 
     return () => {
       // slider.removeEventListener("transitionend", transitionEnd);
       slider.removeEventListener("transitionend", smooth);
+      // window.removeEventListener('resize', onResize)
+      window.removeEventListener("resize", resize);
     };
   });
+
+  const handleResize = () => {
+    setState({ ...state, translate: getWidth(), transition: 0 });
+  };
 
   useEffect(() => {
     if (autoPlay) {
