@@ -9,11 +9,11 @@ interface Props {
 }
 
 const Carousel: React.FC<Props> = (props) => {
-  const { autoPlay, children } = props;
-  // const children = React.Children.toArray(propsChildren);
+  const { autoPlay, children: propsChildren } = props;
+  const children = React.Children.toArray(propsChildren);
 
   const divRef = useRef<HTMLDivElement>(null);
-  const transitionRef = useRef();
+  const transitionRef = useRef<() => void>();
   // const sliderRef = useRef();
 
   // const getWidth = () => window.innerWidth
@@ -24,7 +24,7 @@ const Carousel: React.FC<Props> = (props) => {
 
   const getWidth = () => {
     if (divRef.current) {
-      console.log(divRef.current.getBoundingClientRect().width);
+      // console.log(divRef.current.getBoundingClientRect().width);
       return divRef.current.offsetWidth;
     } else {
       return 500;
@@ -40,13 +40,17 @@ const Carousel: React.FC<Props> = (props) => {
   const { translate, transition, activeIndex, _slides } = state;
 
   useEffect(() => {
+    // eslint-disable-next-line functional/immutable-data
     transitionRef.current = smoothTransition;
   });
 
   useEffect(() => {
     const slider = divRef.current;
     const smooth = (e: any) => {
-      if (e.target.className.includes("slider-content")) {
+      if (
+        e.target.className.includes("slider-content") &&
+        transitionRef.current !== undefined
+      ) {
         transitionRef.current();
       }
     };
@@ -90,11 +94,11 @@ const Carousel: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    if (transition === 0) setState({ ...state, transition: 0.45 });
-  }, [state.transition]);
+    if (transition === 0) setState((state) => ({ ...state, transition: 0.45 }));
+  }, [transition]);
 
   const smoothTransition = () => {
-    let _slides: any = [];
+    let _slides = [];
 
     // We're at the last slide.
     if (activeIndex === children.length - 1) {
