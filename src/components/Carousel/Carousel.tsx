@@ -46,21 +46,26 @@ const Carousel: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const slider = divRef.current;
-    const smooth = (e: any) => {
+    if (slider === null) return;
+    const smooth = (e: Event) => {
+      // e type may bee wrong
+      const element = e.target as HTMLButtonElement;
+      if (element === null) return;
+
       if (
-        e.target.className.includes("slider-content") &&
+        element.className.includes("slider-content") &&
         transitionRef.current !== undefined
       ) {
         transitionRef.current();
       }
     };
 
-    if (slider === null) return;
-
-    const transitionEnd = slider.addEventListener("transitionend", smooth);
+    // const transitionEnd = slider.addEventListener("transitionend", smooth);
+    slider.addEventListener("transitionend", smooth);
 
     return () => {
-      slider.removeEventListener("transitionend", transitionEnd);
+      // slider.removeEventListener("transitionend", transitionEnd);
+      slider.removeEventListener("transitionend", smooth);
     };
   });
 
