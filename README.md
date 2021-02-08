@@ -26,27 +26,25 @@ You will also see any lint errors in the console.
 npm run build
 ```
 
-<center>
-  <table>
-      <thead>
-          <tr>
-              <th align="left">Property</th>
-              <th align="left">Type</th>
-              <th align="left">Default</th>
-              <th align="left">Required</th>
-              <th align="left">Purpose</th>
-              <th align="left">Format</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td align="left">autoPlay</td>
-              <td align="left">number</td>
-              <td align="left">undefine</td>
-              <td align="left">no</td>
-              <td align="left">time required for animation</td>
-              <td align="left">seconds</td>
-          </tr>
-      </tbody>
-  </table>
-</center>
+<table>
+    <thead>
+        <tr>
+            <th align="left">Property</th>
+            <th align="left">Type</th>
+            <th align="left">Default</th>
+            <th align="left">Required</th>
+            <th align="left">Purpose</th>
+            <th align="left">Format</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left">autoPlay</td>
+            <td align="left">number</td>
+            <td align="left">undefine</td>
+            <td align="left">no</td>
+            <td align="left">time required for animation</td>
+            <td align="left">seconds</td>
+        </tr>
+    </tbody>
+</table>
