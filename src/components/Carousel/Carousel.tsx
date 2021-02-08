@@ -14,8 +14,8 @@ const Carousel: React.FC<Props> = (props) => {
   // const children = React.Children.toArray(propsChildren);
 
   const divRef = useRef<HTMLDivElement>(null);
-  const transitionRef = useRef<() => void | null>();
-  const resizeRef = useRef<() => void | null>();
+  // const transitionRef = useRef<() => void | null>();
+  // const resizeRef = useRef<() => void | null>();
 
   // const getWidth = () => window.innerWidth
 
@@ -28,6 +28,7 @@ const Carousel: React.FC<Props> = (props) => {
       // console.log(divRef.current.getBoundingClientRect().width);
       return divRef.current.offsetWidth;
     } else {
+      // TODO: fix magic number
       return 500;
     }
   };
@@ -40,12 +41,12 @@ const Carousel: React.FC<Props> = (props) => {
   });
   const { translate, transition, activeIndex, _slides } = state;
 
-  useEffect(() => {
-    // eslint-disable-next-line functional/immutable-data
-    transitionRef.current = smoothTransition;
-    // eslint-disable-next-line functional/immutable-data
-    resizeRef.current = handleResize;
-  });
+  // useEffect(() => {
+  //   // eslint-disable-next-line functional/immutable-data
+  //   // transitionRef.current = smoothTransition;
+  //   // eslint-disable-next-line functional/immutable-data
+  //   // resizeRef.current = handleResize;
+  // });
 
   useEffect(() => {
     const slider = divRef.current;
@@ -58,46 +59,55 @@ const Carousel: React.FC<Props> = (props) => {
       if (element === null) return;
 
       if (
-        element.className.includes("slider-content") &&
-        transitionRef.current !== undefined
+        element.className.includes("slider-content")
+        // &&
+        // transitionRef.current !== undefined
       ) {
-        transitionRef.current();
+        // transitionRef.current();
+        smoothTransition();
       }
     };
 
-    const resize = () => {
-      if (resizeRef.current === null || resizeRef.current === undefined) return;
-      resizeRef.current();
-    };
+    // const resize = () => {
+    //   // if (resizeRef.current === null || resizeRef.current === undefined) return;
+    //   // resizeRef.current();
+    //   handleResize()
+    // };
 
     // const transitionEnd = slider.addEventListener("transitionend", smooth);
     slider.addEventListener("transitionend", smooth);
     // const onResize = window.addEventListener('resize', resize)
-    window.addEventListener("resize", resize);
+    // window.addEventListener("resize", resize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       // slider.removeEventListener("transitionend", transitionEnd);
       slider.removeEventListener("transitionend", smooth);
       // window.removeEventListener('resize', onResize)
-      window.removeEventListener("resize", resize);
+      // window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
     };
   });
+
+  useEffect(() => {
+    if (transition === 0) setState((state) => ({ ...state, transition: 0.45 }));
+  }, [transition]);
 
   const handleResize = () => {
     setState({ ...state, translate: getWidth(), transition: 0 });
   };
 
   useEffect(() => {
-    if (autoPlay) {
-      const play = () => {
-        nextSlide();
-      };
+    if (!autoPlay) return;
 
-      const interval = setInterval(play, autoPlay * 1000);
-      return () => clearInterval(interval);
-    } else {
-      return;
-    }
+    const play = () => {
+      nextSlide();
+    };
+
+    const interval = setInterval(play, autoPlay * 1000);
+    return () => {
+      clearInterval(interval);
+    };
   });
 
   const nextSlide = () => {
@@ -115,10 +125,6 @@ const Carousel: React.FC<Props> = (props) => {
       activeIndex: activeIndex === 0 ? children.length - 1 : activeIndex - 1
     });
   };
-
-  useEffect(() => {
-    if (transition === 0) setState((state) => ({ ...state, transition: 0.45 }));
-  }, [transition]);
 
   const smoothTransition = () => {
     let _slides = [];
