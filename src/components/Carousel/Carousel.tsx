@@ -1,24 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dots from "./Dots/Dots";
 import ArrowIconLeft from "./Icons/ArrowIconLeft";
 import ArrowIconRight from "./Icons/ArrowIconRight";
 
 interface Props {
   children: React.ReactElement[];
+  autoPlay?: number;
 }
 
 const Carousel: React.FC<Props> = (props) => {
-  const children = React.Children.toArray(props.children);
+  const { autoPlay, children: propsChildren } = props;
+  const children = React.Children.toArray(propsChildren);
+  const divRef = useRef<HTMLDivElement>(null);
   // const getWidth = () => window.innerWidth
+
   const [state, setState] = useState({
     activeIndex: 0,
     translate: 0,
     transition: 0.45
   });
-
   const { translate, transition, activeIndex } = state;
 
-  const divRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (autoPlay) {
+      const play = () => {
+        nextSlide();
+      };
+
+      const interval = setInterval(play, autoPlay * 1000);
+      return () => clearInterval(interval);
+    } else {
+      return;
+    }
+  });
 
   const getWidth = () => {
     if (divRef.current) {
@@ -28,10 +42,6 @@ const Carousel: React.FC<Props> = (props) => {
       return 500;
     }
   };
-
-  // useEffect(() => {
-  //   console.log("width", divRef.current ? divRef.current.offsetWidth : 0);
-  // }, [divRef.current]);
 
   const nextSlide = () => {
     if (activeIndex === children.length - 1) {
@@ -71,7 +81,6 @@ const Carousel: React.FC<Props> = (props) => {
         style={{
           transform: `translateX(-${translate}px)`,
           transition: `transform ease-out ${transition}s`,
-          // height: "100%",
           width: `${getWidth() * children.length}px`,
           display: "flex"
         }}
@@ -84,12 +93,16 @@ const Carousel: React.FC<Props> = (props) => {
       </div>
 
       <Dots activeIndex={activeIndex}>{props.children}</Dots>
-      <button onClick={prevSlide} className="left">
-        <ArrowIconLeft />
-      </button>
-      <button onClick={nextSlide} className="right">
-        <ArrowIconRight />
-      </button>
+      {!autoPlay && (
+        <>
+          <button onClick={prevSlide} className="left">
+            <ArrowIconLeft />
+          </button>
+          <button onClick={nextSlide} className="right">
+            <ArrowIconRight />
+          </button>
+        </>
+      )}
     </div>
   );
 };

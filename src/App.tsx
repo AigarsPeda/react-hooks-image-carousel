@@ -22,7 +22,7 @@ const App: React.FC = () => {
   return (
     <div className="main-container">
       <div className="main-carousel-container">
-        <Carousel>{divWithText}</Carousel>
+        <Carousel autoPlay={7}>{divWithText}</Carousel>
       </div>
 
       <div className="main-image-container">
