@@ -133,33 +133,32 @@ const Carousel: React.FC<Props> = (props) => {
   };
 
   // TODO: add touch support
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  // const [touchStart, setTouchStart] = useState(0);
+  // const [touchEnd, setTouchEnd] = useState(0);
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
+  // const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  //   setTouchStart(e.targetTouches[0].clientX);
+  // };
 
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+  // const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+  //   setTouchEnd(e.targetTouches[0].clientX);
+  // };
 
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 150) {
-      // do your stuff here for left swipe
-      nextSlide();
-    }
+  // const handleTouchEnd = () => {
+  //   if (touchStart - touchEnd > 150) {
+  //     // do your stuff here for left swipe
+  //     nextSlide();
+  //   }
 
-    if (touchStart - touchEnd < -150) {
-      // do your stuff here for right swipe
-      prevSlide();
-    }
-  };
+  //   if (touchStart - touchEnd < -150) {
+  //     // do your stuff here for right swipe
+  //     prevSlide();
+  //   }
+  // };
 
   return (
     <div ref={divRef} className="carousel-container">
-      {console.log(touchEnd)}
-      <div
+      <ul
         style={{
           transform: `translateX(-${translate}px)`,
           transition: `transform ease-out ${transition}s`,
@@ -170,17 +169,17 @@ const Carousel: React.FC<Props> = (props) => {
         className="slider-content"
       >
         {_slides.map((slide, index) => (
-          <div
+          <li
             key={index}
             className="carousel-item"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            // onTouchStart={handleTouchStart}
+            // onTouchMove={handleTouchMove}
+            // onTouchEnd={handleTouchEnd}
           >
             {slide}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <Dots activeIndex={activeIndex}>{props.children}</Dots>
       {!autoPlay && (
