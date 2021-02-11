@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Carousel from "./components/Carousel/Carousel";
 import Img from "./assets/img1.jpg";
 import "./index.scss";
@@ -12,8 +12,35 @@ const text = [
 ];
 
 const divWithText = text.map((card, index) => {
+  const slide = React.createRef<HTMLDivElement>();
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const el = slide.current;
+    if (el === null) return;
+    const r = el?.getBoundingClientRect();
+    el.style.setProperty(
+      "--x",
+      (event.clientX - (r.left + Math.floor(r.width / 2))).toString()
+    );
+    el.style.setProperty(
+      "--y",
+      (event.clientY - (r.top + Math.floor(r.height / 2))).toString()
+    );
+  };
+
+  const handleMouseLeave = () => {
+    slide.current?.style.setProperty("--x", "0");
+    slide.current?.style.setProperty("--y", "0");
+  };
   return (
-    <div className="test" key={index}>
+    <div
+      className="test"
+      ref={slide}
+      key={index}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {card}
     </div>
   );
