@@ -1,11 +1,50 @@
 .test {
   width: 300px;
-  margin: 0 auto;
+  margin: 5px auto;
   height: 200px;
   background-color: yellow;
   border: solid 1px black;
   word-wrap: break-word;
 }
+
+.test {
+  --x: 0;
+  --y: 0;
+  --d: 50;
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+
+  &:hover {
+    -webkit-transform: scale(1.025)
+      translate(
+        calc(var(--x) / var(--d) * 1px),
+        calc(var(--y) / var(--d) * 1px)
+      );
+    transform: scale(1.025)
+      translate(
+        calc(var(--x) / var(--d) * 1px),
+        calc(var(--y) / var(--d) * 1px)
+      );
+  }
+}
+// @media (hover: hover) {
+//   .test:hover {
+//     -webkit-transform: scale(1.025)
+//       translate(
+//         calc(var(--x) / var(--d) * 1px),
+//         calc(var(--y) / var(--d) * 1px)
+//       );
+//     transform: scale(1.025)
+//       translate(
+//         calc(var(--x) / var(--d) * 1px),
+//         calc(var(--y) / var(--d) * 1px)
+//       );
+//   }
+// }
 
 .main-container {
   display: flex;
