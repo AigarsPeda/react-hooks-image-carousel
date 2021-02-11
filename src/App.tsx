@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import Carousel from "./components/Carousel/Carousel";
+import React from "react";
 import Img from "./assets/img1.jpg";
+import Carousel from "./components/Carousel/Carousel";
 import "./index.scss";
 
 const text = [
