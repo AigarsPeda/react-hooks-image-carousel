@@ -2,6 +2,10 @@
   position: relative;
   overflow: hidden;
 
+  ul {
+    list-style-type: none;
+  }
+
   .carousel-item {
     width: 100%;
     // background-color: blue;
